@@ -53,11 +53,11 @@ sudo apt install python3.7 python3-dev python3-pip
 
 ## paso 6 
    - crear migraciones
-    python manage.py migrate
+    python manage.py makemigrations
 
 ## paso 7 
    - correr el servidor
     python manage.py runserver
 
 ## aplicar migraciones
-        python manage.py makemigrations      
+        python manage.py migrate      
