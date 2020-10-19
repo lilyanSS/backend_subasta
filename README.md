@@ -10,12 +10,12 @@ sudo apt install python3.7 python3-dev python3-pip
 ## paso 2 
    - Crear entorno virtual en ubuntu  desde la linea de comandos en la carpeta del proyecto
     ```bash
-    python3 -m venv myvenv
+      python3 -m venv myvenv
     ```
 
    - crear entorno virtual en Windows  desde la linea de comandos en la carpeta del proyecto
     ```bash
-    python -m venv myvenv
+        python -m venv myvenv
     ```
 
 ## paso 3 
@@ -49,7 +49,7 @@ sudo apt install python3.7 python3-dev python3-pip
             'PORT': '3306',
         }
     }
-    ```
+   ```
 
 ## paso 6 
    - crear migraciones
