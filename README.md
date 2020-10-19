@@ -21,9 +21,9 @@ sudo apt install python3.7 python3-dev python3-pip
 ## paso 3 
 
    - Ejecutar entorno virtual en ubuntu desde la linea de comandos en la carpeta del proyecto
-    ```bash
-    source myvenv/bin/activate
-    ```
+      ```bash
+        source myvenv/bin/activate
+        ```
 
    - ejecutar entorno virtual en Windows desde la linea de comandos en la carpeta del proyecto
        ```bash
@@ -32,9 +32,9 @@ sudo apt install python3.7 python3-dev python3-pip
 
 ## paso 4 
    - Instalar requerimientos 
-    ```bash
-    pip install -r requirements.txt
-    ```
+     ```bash
+        pip install -r requirements.txt
+        ```
 
 ## paso 5 
    - agregar las credenciales para conectar a mysql en la carpeta subasta en el archivo settings.py 
@@ -51,11 +51,11 @@ sudo apt install python3.7 python3-dev python3-pip
     }
     ```
 
-### paso 6 ###
+## paso 6 
    - crear migraciones
     python manage.py migrate
 
-### paso 7 ###
+## paso 7 
    - correr el servidor
     python manage.py runserver
 
