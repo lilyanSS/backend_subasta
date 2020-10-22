@@ -10,9 +10,13 @@ from apps.users import models
 import random
 import string 
 from django.contrib.auth import authenticate, get_user_model
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import action
+import json 
 User = get_user_model()
 
 class LoginView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
     serializer_class = my_serializer.LoginSerializer
     queryset = User.objects.all()
 
