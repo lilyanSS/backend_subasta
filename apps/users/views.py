@@ -11,7 +11,7 @@ import random
 import string 
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework.permissions import AllowAny
-from rest_framework.decorators import action
+from rest_framework.decorators import action,permission_classes
 import json 
 User = get_user_model()
 
@@ -51,3 +51,32 @@ class LoginView(generics.CreateAPIView):
                     return Response({_("The user has not been activated.")}, status=status.HTTP_401_UNAUTHORIZED)
             except:
                 return Response({_("No existe el usuario.")}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+@api_view(['POST'],)
+@permission_classes((AllowAny,))
+def showPersonalInfo(request):
+    serializer = my_serializer.PersonalInfo(data=request.data)
+    data={}
+    error={}
+    if serializer.is_valid():
+        data = serializer.data
+    else:
+        error= serializer.errors
+    context = {'data':data, 'error': error}
+
+    return Response(context)
+
+@api_view(['POST'],)
+@permission_classes((AllowAny,))
+def showBankAccount(request):
+    serializer = my_serializer.BankAccountInfo(data=request.data)
+    data={}
+    error={}
+    if serializer.is_valid():
+        data = serializer.data
+    else:
+        error= serializer.errors
+    context = {'data':data, 'error': error}
+
+    return Response(context)
