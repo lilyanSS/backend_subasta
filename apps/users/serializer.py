@@ -57,4 +57,23 @@ class BankAccountInfo(serializers.Serializer):
         data.update(info)
         return data
 
+class Logout(serializers.Serializer):
+    session_key = serializers.CharField()
+    
+    def to_representation(self, instance):
+        data={}
+        if self.is_valid():
+            try:
+                user_session = models.Session.objects.filter(session_key= self.validated_data['session_key'])
+                if(len(user_session)> 0):
+                    user_session.delete()
+                    data["msg"]="success"
+                else:
+                    raise serializers.ValidationError({'Error': 'Sesión de usuario inválida'})
+            except:
+                raise serializers.ValidationError({'Error': 'Sesión de usuario inválida'})
+
+        return data
+
+
 
