@@ -80,3 +80,18 @@ def showBankAccount(request):
     context = {'data':data, 'error': error}
 
     return Response(context)
+    
+@api_view(['POST'],)
+@permission_classes((AllowAny,))
+def Logout(request):
+    serializer = my_serializer.Logout(data=request.data)
+    data={}
+    error={}
+    if serializer.is_valid():
+        data= serializer.data
+    else:
+        error = serializer.errors
+
+    context = {'data':data, 'error': error}    
+    return Response(context)
+
