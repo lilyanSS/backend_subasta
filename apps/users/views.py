@@ -34,7 +34,7 @@ class LoginView(generics.CreateAPIView):
             if existing_session:
                 models_user.Session.objects.filter(user_id=user).update( session_key = session_key)
             else:
-                new_session = models.Session(
+                new_session = models_user.Session(
 			    session_key = session_key,
 			    user = user,
 			    )
