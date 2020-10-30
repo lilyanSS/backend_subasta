@@ -1,9 +1,10 @@
 from django.apps import AppConfig
 from rest_framework import serializers
-from apps.users import models 
+from apps.users import models as models_user
 from django.contrib.auth import authenticate
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import authenticate, get_user_model
+from apps.auction import models as models_auction
 User = get_user_model()
 
 class LoginSerializer(serializers.Serializer):
@@ -26,7 +27,7 @@ class PersonalInfo(serializers.Serializer):
         info={}
         if self.is_valid():
             try:
-                user_session = models.Session.objects.filter(session_key= self.validated_data['session']).get()
+                user_session = models_user.Session.objects.filter(session_key= self.validated_data['session']).get()
             except:
                 raise serializers.ValidationError({'Error': 'Sesión de usuario inválida'})
         info['firstname']= user_session.user.first_name
@@ -45,10 +46,10 @@ class BankAccountInfo(serializers.Serializer):
         info={}
         if self.is_valid():
             try:
-                user_session = models.Session.objects.filter(session_key= self.validated_data['session']).get()
-                bank_account= models.BankAccount.objects.filter(user=user_session.user).exists()
+                user_session = models_user.Session.objects.filter(session_key= self.validated_data['session']).get()
+                bank_account= models_user.BankAccount.objects.filter(user=user_session.user).exists()
                 if bank_account:
-                    bank_account= models.BankAccount.objects.filter(user=user_session.user).get()
+                    bank_account= models_user.BankAccount.objects.filter(user=user_session.user).get()
                     info["account_number"]=bank_account.account_number
                     info["account_name"]=bank_account.account_name
                     info["total"]=bank_account.total
@@ -64,7 +65,7 @@ class Logout(serializers.Serializer):
         data={}
         if self.is_valid():
             try:
-                user_session = models.Session.objects.filter(session_key= self.validated_data['session_key'])
+                user_session = models_user.Session.objects.filter(session_key= self.validated_data['session_key'])
                 if(len(user_session)> 0):
                     user_session.delete()
                     data["msg"]="success"
@@ -74,6 +75,11 @@ class Logout(serializers.Serializer):
                 raise serializers.ValidationError({'Error': 'Sesión de usuario inválida'})
 
         return data
+
+
+
+
+
 
 
 

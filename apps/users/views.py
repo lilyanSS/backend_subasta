@@ -6,7 +6,8 @@ from rest_framework.decorators import api_view
 from rest_framework import generics, status, views, viewsets
 from django.contrib.auth import authenticate, login, logout
 from django.utils.translation import ugettext_lazy as _
-from apps.users import models
+from apps.users import models as models_user
+from apps.auction import models as models_auction
 import random
 import string 
 from django.contrib.auth import authenticate, get_user_model
@@ -29,16 +30,16 @@ class LoginView(generics.CreateAPIView):
             session_key = ''
 
             session_key = session_key.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(64))
-            existing_session = models.Session.objects.filter(user_id=user).exists()
+            existing_session = models_user.Session.objects.filter(user_id=user).exists()
             if existing_session:
-                models.Session.objects.filter(user_id=user).update( session_key = session_key)
+                models_user.Session.objects.filter(user_id=user).update( session_key = session_key)
             else:
                 new_session = models.Session(
 			    session_key = session_key,
 			    user = user,
 			    )
                 new_session.save()
-            token = models.Session.objects.filter(user_id=user).get()
+            token = models_user.Session.objects.filter(user_id=user).get()
             data={}
             data['session'] = token.session_key
             return Response(data)
@@ -94,4 +95,6 @@ def Logout(request):
 
     context = {'data':data, 'error': error}    
     return Response(context)
+
+
 
