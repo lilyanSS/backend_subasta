@@ -1,1 +1,1 @@
-web: gunicorn backend_subasta.wsgi --log-file -
+web: gunicorn subastabackend.wsgi --log-file -
