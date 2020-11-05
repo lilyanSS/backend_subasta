@@ -23,4 +23,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('apps.users.urls')),
     path('subastas/', include('apps.auction.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]

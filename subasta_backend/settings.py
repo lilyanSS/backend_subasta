@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+import django_heroku
 import os
 import dj_database_url
 from decouple import config
@@ -171,3 +171,4 @@ USE_TZ = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+django_heroku.settings(locals())
