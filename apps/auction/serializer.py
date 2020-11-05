@@ -12,6 +12,7 @@ class VehicleAuctionSerializer(serializers.Serializer):
     session = serializers.CharField()
     base_price= serializers.FloatField()
     id_vehicle = serializers.IntegerField()
+    auction_date =  serializers.DateField()
 
     def save(self):
         data = {}
@@ -32,7 +33,8 @@ class VehicleAuctionSerializer(serializers.Serializer):
             data = model_auction.Vehicle_in_auction(
                 base_price = self.validated_data['base_price'],
                 id_vehicle = self.validated_data['id_vehicle'],
-                admin = user_session.user
+                admin = user_session.user,
+                auction_date = self.validated_data['auction_date']
                 )
             data.save()
 
@@ -43,3 +45,4 @@ class AuctionListSerializer(serializers.ModelSerializer):
     class Meta:
         model = model_auction.Vehicle_in_auction
         fields ="__all__"  
+

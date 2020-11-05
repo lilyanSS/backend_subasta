@@ -23,7 +23,7 @@ def vechicleAuctionView(request):
     else:
         error= serializer.errors
     context = {'data':data, 'error': error}
-
+    print(context, " context")
     return Response(context)
  
 @api_view(['GET'],)
@@ -45,10 +45,22 @@ def auctionList(request):
                         "creation_date":vehicle.creation_date,
                         "on_sale":vehicle.on_sale,
                         "id_vehicle":vehicle.id_vehicle,
-                        "id_admin":vehicle.admin.id,
+                        "id_admin":vehicle.admin.id,                       
                         "car":item,
+                        "auction_date":vehicle.auction_date
                     })
 
     return Response(info) 
 
-    
+@api_view(['POST'], )
+@permission_classes((AllowAny,))
+def vehicle_by_id(request):
+    print(request.data["id"], "id")
+    url = "http://localhost:8000/vehicles/vehicles/{id}".format(id=request.data["id"])
+    response = requests.get(url);
+
+    if response.status_code ==200:
+        data =response.json()
+    else:
+        data=[]
+    return Response(data)
