@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-import django_heroku
+# import django_heroku
 import os
-import dj_database_url
-from decouple import config
+# import dj_database_url
+# from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -121,9 +121,13 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'subasta',
-        'USER': 'jaeger',
-        'PASSWORD': 'jaeger-admin',
-        'HOST': '157.230.217.60',   # Or an IP Address that your DB is hosted on
+        # 'USER': 'jaeger',
+        # 'PASSWORD': 'jaeger-admin',
+        # 'HOST': '157.230.217.60',   # Or an IP Address that your DB is hosted on
+        # 'PORT': '3306',
+        'USER': 'lilyan',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
@@ -175,4 +179,4 @@ USE_TZ = True
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
