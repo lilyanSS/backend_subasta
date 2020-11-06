@@ -121,14 +121,14 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'subasta',
-        # 'USER': 'jaeger',
-        # 'PASSWORD': 'jaeger-admin',
-        # 'HOST': '157.230.217.60',   # Or an IP Address that your DB is hosted on
-        # 'PORT': '3306',
-        'USER': 'lilyan',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'USER': 'jaeger',
+        'PASSWORD': 'jaeger-admin',
+        'HOST': '157.230.217.60',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
+        # 'USER': 'lilyan',
+        # 'PASSWORD': 'admin',
+        # 'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        # 'PORT': '3306',
     }
 }
 # DATABASES = {
