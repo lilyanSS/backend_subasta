@@ -1,0 +1,1 @@
+web: gunicorn subasta_backend.wsgi --log-file -

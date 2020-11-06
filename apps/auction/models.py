@@ -6,6 +6,7 @@ User = get_user_model()
 class Vehicle_in_auction(models.Model):
     base_price = models.FloatField(verbose_name="base_price")
     creation_date = models.DateTimeField(default=timezone.now)
+    auction_date =  models.DateField(null=True)
     on_sale = models.BooleanField(default=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     id_vehicle= models.IntegerField()

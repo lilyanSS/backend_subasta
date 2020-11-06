@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+# import django_heroku
 import os
+# import dj_database_url
+# from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -70,6 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 CORS_ALLOW_METHODS = [
@@ -103,9 +106,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'subasta_backend.wsgi.application'
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 DATABASES = {
     'default': {
@@ -113,12 +121,28 @@ DATABASES = {
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'subasta',
-        'USER': 'lilyan',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'USER': 'jaeger',
+        'PASSWORD': 'jaeger-admin',
+        'HOST': '157.230.217.60',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
+        # 'USER': 'lilyan',
+        # 'PASSWORD': 'admin',
+        # 'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        # 'PORT': '3306',
     }
 }
+# DATABASES = {
+#     "default": {
+#         "ENGINE" : "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, "db.sqlite3")
+#     }
+# }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+# }
 
 
 # Password validation
@@ -153,8 +177,6 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
+# django_heroku.settings(locals())
