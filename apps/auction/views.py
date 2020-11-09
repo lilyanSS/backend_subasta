@@ -32,7 +32,7 @@ def auctionList(request):
     lists = models_auction.Vehicle_in_auction.objects.all()
     info=[]
 
-    response = requests.get('https://proveedor-bk.herokuapp.com/vehicles/vehicles/');
+    response = requests.get('http://lilyansica.pythonanywhere.com/vehicles/vehicles/');
     if response.status_code == 200:
         data= response.json()
         vehicles = data.get('results')
@@ -56,7 +56,7 @@ def auctionList(request):
 @permission_classes((AllowAny,))
 def vehicle_by_id(request):
     print(request.data["id"], "id")
-    url = "https://proveedor-bk.herokuapp.com/vehicles/vehicles/{id}".format(id=request.data["id"])
+    url = "http://lilyansica.pythonanywhere.com/vehicles/vehicles/{id}".format(id=request.data["id"])
     response = requests.get(url);
 
     if response.status_code ==200:
