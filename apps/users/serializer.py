@@ -35,6 +35,7 @@ class PersonalInfo(serializers.Serializer):
         info['email']= user_session.user.email
         info['is_superuser'] = user_session.user.is_superuser
         info['date_joined'] = user_session.user.date_joined
+        info['id']= user_session.user.id
         data.update(info)
         return data
 
