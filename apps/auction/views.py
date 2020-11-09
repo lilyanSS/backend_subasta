@@ -74,7 +74,7 @@ def CreateOffer(request):
 
     if serializer.is_valid():
         new_data = serializer.save()
-        data['msg'] = "tu oferta a sido agregado exitosamente."
+        data['msg'] = "Tu oferta a sido agregada exitosamente."
     else:
         error= serializer.errors
     context = {'data':data, 'error': error}
