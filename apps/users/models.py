@@ -26,4 +26,7 @@ class BankAccount(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     account_number= models.CharField(verbose_name="Account number", validators=[RegexValidator(r'^[0-9]{1,50}?$')], max_length=50)
     account_name= models.CharField(max_length=100, verbose_name="Account name")
-    total= models.DecimalField(max_digits=8, decimal_places=2)
+    total= models.DecimalField(max_digits=50, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.user}'

@@ -64,3 +64,19 @@ def vehicle_by_id(request):
     else:
         data=[]
     return Response(data)
+
+@api_view(['POST'], )
+@permission_classes((AllowAny,))
+def CreateOffer(request):
+    serializer = my_serializer.CreateOfferSerializer(data=request.data)
+    data={}
+    error={}
+
+    if serializer.is_valid():
+        new_data = serializer.save()
+        data['msg'] = "tu oferta a sido agregado exitosamente."
+    else:
+        error= serializer.errors
+    context = {'data':data, 'error': error}
+
+    return Response(context)

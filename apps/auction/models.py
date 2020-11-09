@@ -11,6 +11,11 @@ class Vehicle_in_auction(models.Model):
     admin = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     id_vehicle= models.IntegerField()
 
-
+class Offers(models.Model):
+    user= models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    creation_date = models.DateTimeField(default=timezone.now)
+    available = models.BooleanField(default=True)
+    id_vehicle= models.IntegerField()
+    price_offered= models.FloatField() 
 
 
