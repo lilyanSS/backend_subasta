@@ -80,3 +80,29 @@ def CreateOffer(request):
     context = {'data':data, 'error': error}
 
     return Response(context)
+
+@api_view(['POST'], )
+@permission_classes((AllowAny,))
+def myOffers(request):
+    serializer=my_serializer.myOffersSerializers(data=request.data)
+    data={}
+    error={}
+
+    if serializer.is_valid():
+        info=serializer.data
+        my_data= info['data']
+        for index, item in zip(range(len(my_data)), my_data):
+            url = "http://lilyansica.pythonanywhere.com/vehicles/vehicles/{id}".format(id=item['id_vehicle'])
+            response = requests.get(url);
+
+            if response.status_code ==200:
+                result =response.json()
+                if(result['id'] == item['id_vehicle']):
+                    info['data'][index]['vehicle']=result
+                data["info"]=info
+    else:
+        error= serializer.errors
+
+    context = {'data':data, 'error': error}
+
+    return Response(context)

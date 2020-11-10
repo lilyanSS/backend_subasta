@@ -84,3 +84,33 @@ class CreateOfferSerializer(serializers.Serializer):
                 raise serializers.ValidationError({'Error': 'El precio ofrecido es menor al precio base'})
         
         return data
+
+
+class myOffersSerializers(serializers.Serializer):
+    session = serializers.CharField()
+
+    def to_representation(self, instance):
+        extra_info = {}
+        info=[]
+        try:
+            user_session = model_user.Session.objects.filter(session_key= self.validated_data['session']).get()
+        except:
+            raise serializers.ValidationError({'Error': 'Invalid User Session'})
+
+        my_offers= model_auction.Offers.objects.filter(user=user_session.user, available =1)
+
+        for item in my_offers:
+            info.append({
+                "id": item.id,
+                "available":item.available,
+                "id_vehicle":item.id_vehicle,
+                "price_offered":item.price_offered,
+                "user_id":item.user_id
+
+            })
+
+        new_data={
+            "data":info
+        }
+        extra_info.update(new_data)
+        return extra_info
