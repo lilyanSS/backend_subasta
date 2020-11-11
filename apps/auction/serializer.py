@@ -100,13 +100,21 @@ class myOffersSerializers(serializers.Serializer):
         my_offers= model_auction.Offers.objects.filter(user=user_session.user, available =1)
 
         for item in my_offers:
+            vehicle_in_auction= model_auction.Vehicle_in_auction.objects.get(id=item.vehicle_in_auction_id)
+            vehicle={
+                "id":vehicle_in_auction.id,
+                "base_price":vehicle_in_auction.base_price,
+                "auction_date":vehicle_in_auction.auction_date,
+                "id_vehicle":vehicle_in_auction.id_vehicle
+            }
+
             info.append({
                 "id": item.id,
                 "available":item.available,
                 "id_vehicle":item.id_vehicle,
                 "price_offered":item.price_offered,
-                "user_id":item.user_id
-
+                "user_id":item.user_id,
+                "vehicle_in_auction":vehicle
             })
 
         new_data={
