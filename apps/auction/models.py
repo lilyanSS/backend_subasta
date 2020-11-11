@@ -16,6 +16,7 @@ class Offers(models.Model):
     creation_date = models.DateTimeField(default=timezone.now)
     available = models.BooleanField(default=True)
     id_vehicle= models.IntegerField()
-    price_offered= models.FloatField() 
+    price_offered= models.FloatField()
+    vehicle_in_auction= models.ForeignKey(Vehicle_in_auction, on_delete=models.CASCADE, null=True) 
 
 
