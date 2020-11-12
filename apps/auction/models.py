@@ -19,4 +19,9 @@ class Offers(models.Model):
     price_offered= models.FloatField()
     vehicle_in_auction= models.ForeignKey(Vehicle_in_auction, on_delete=models.CASCADE, null=True) 
 
+class Vehicle_sold(models.Model):
+    price_sold = models.FloatField()
+    date= models.DateField(null=True)
+    offer= models.ForeignKey(Offers, on_delete=models.CASCADE)
+
 

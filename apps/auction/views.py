@@ -23,7 +23,7 @@ def vechicleAuctionView(request):
     else:
         error= serializer.errors
     context = {'data':data, 'error': error}
-    print(context, " context")
+
     return Response(context)
  
 @api_view(['GET'],)
@@ -55,7 +55,6 @@ def auctionList(request):
 @api_view(['POST'], )
 @permission_classes((AllowAny,))
 def vehicle_by_id(request):
-    print(request.data["id"], "id")
     url = "http://lilyansica.pythonanywhere.com/vehicles/vehicles/{id}".format(id=request.data["id"])
     response = requests.get(url);
 
