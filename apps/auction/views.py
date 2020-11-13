@@ -114,7 +114,7 @@ def increasedSupply(request):
 
     if serializer.is_valid():
         info= serializer.data
-        data['msg'] = "hola"
+        data['info'] = info
 
     else:
         error= serializer.errors

@@ -5,6 +5,7 @@ from apps.auction import models as model_auction
 from django.contrib.auth import authenticate
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import authenticate, get_user_model
+from django.db.models import Avg, Max, Min, Sum
 
 User = get_user_model()
 
@@ -129,26 +130,13 @@ class increasedSupplySerializer(serializers.Serializer):
 
     def to_representation(self, instance):
         info={}
-        lists=[]
-        print(self.validated_data['session'], " --===-=-==- =-=-= =-=-")
+        
         try:
             user_session = model_user.Session.objects.filter(session_key= self.validated_data['session']).get()
         except:
             raise serializers.ValidationError({'Error': 'Invalid User Session'})
 
-        offers = model_auction.Offers.objects.filter(available=1, vehicle_in_auction=self.validated_data['id_vehicle'] )
+        max_offer= model_auction.Offers.objects.filter(available=1, vehicle_in_auction=self.validated_data['id_vehicle']).aggregate(price=Max('price_offered'))
 
-        for item in offers:
-            lists=({
-                "id": int(item.id),
-                "price_offered": float(item.price_offered)
-                })
-        print("list -->", lists)        
-
-        max_offer= max(lists, key=lambda d: d["price_offered"])
-        print(max_offer, " oferta maxima")
-
-
-
-
+        info.update(max_offer)
         return info 
