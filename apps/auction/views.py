@@ -34,9 +34,8 @@ def auctionList(request):
 
     response = requests.get('http://lilyansica.pythonanywhere.com/vehicles/vehicles/');
     if response.status_code == 200:
-        data= response.json()
-        vehicles = data.get('results')
-        for item in vehicles:
+        data= response.json()        
+        for item in data:
             for vehicle in lists:
                 if(item['id'] == vehicle.id_vehicle):
                     info.append({
@@ -105,3 +104,29 @@ def myOffers(request):
     context = {'data':data, 'error': error}
 
     return Response(context)
+
+@api_view(['POST'], )
+@permission_classes((AllowAny,))
+def increasedSupply(request):
+    serializer= my_serializer.increasedSupplySerializer(data=request.data)
+    data={}
+    error={}
+
+    if serializer.is_valid():
+        info= serializer.data
+        data['msg'] = "hola"
+
+    else:
+        error= serializer.errors
+
+
+    context = {'data':data, 'error':error}
+
+
+    return Response(context)
+
+
+
+
+
+
